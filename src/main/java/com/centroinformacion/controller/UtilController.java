@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.centroinformacion.entity.Alumno;
 import com.centroinformacion.entity.DataCatalogo;
+import com.centroinformacion.entity.Editorial;
 import com.centroinformacion.entity.Pais;
 import com.centroinformacion.service.AlumnoService;
 import com.centroinformacion.service.DataCatalogoService;
+import com.centroinformacion.service.EditorialService;
 import com.centroinformacion.service.PaisService;
 import com.centroinformacion.util.AppSettings;
 
@@ -31,7 +33,10 @@ public class UtilController {
 	@Autowired
 	private AlumnoService alumnoService;
 	
-
+	@Autowired
+	private EditorialService editorialService;
+	
+	
 	@GetMapping("/listaPais")
 	@ResponseBody
 	public List<Pais> listaPais() {
@@ -91,5 +96,36 @@ public class UtilController {
 	@ResponseBody
 	public List<DataCatalogo> listaEstadoLibro() {
 		return dataCatalogoService.listaDataCatalogo(AppSettings.CATALOGO_08_ESTADO_DE_LIBRO);
+	}
+	
+	@GetMapping("/listaEstadoSala")
+	@ResponseBody
+	public List<DataCatalogo> listaEstadoReserva() {
+		return dataCatalogoService.listaDataCatalogo(AppSettings.CATALOGO_09_ESTADO_SALA);
+	}
+	
+	@GetMapping("/listaCentroEstudios")
+	@ResponseBody
+	public List<DataCatalogo> listaCentroEstudios(){
+		return dataCatalogoService.listaDataCatalogo(AppSettings.CATALOGO_10_CENTRO_DE_ESTUDIOS);
+	}
+	
+	@GetMapping("/listaIdioma")
+	@ResponseBody
+	public List<DataCatalogo> listaIdioma(){
+		return dataCatalogoService.listaDataCatalogo(AppSettings.CATALOGO_11_IDIOMA);
+	}
+	
+	@GetMapping("/listaTemaTesis")
+	@ResponseBody
+	public List<DataCatalogo> listaTemaTesis(){
+		return dataCatalogoService.listaDataCatalogo(AppSettings.CATALOGO_12_TEMA_DE_TESIS);
+	}
+	
+	//Metodo para listar las editoriales - Garcia
+	@GetMapping("/listaEditorial")
+	@ResponseBody
+	public List<Editorial> listaEdtorial() {
+		return editorialService.listaTodos();
 	}
 }
